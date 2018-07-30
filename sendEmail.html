@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<title>Send Email</title>
+	<script>
+		/*$('#weatherLocation').click(function() {
+			window.alert("inside mail send()");
+		}); */
+		
+		function sendMail() {
+		console.log('hello');
+        window.alert("inside mail send()"), 
+		
+		$.ajax({
+            url: 'http://suslence.com/wms/sendEmail',
+            method: 'POST',
+			
+            data: {
+                'request': {
+                    'to': $("#userEmail").val(),
+                    'subject': "My Subject",
+                    'text': $("#message").val(),
+                    'html': $("#message").val()
+                }
+            },
+			success: function(response) {
+			console.log(response);
+			},
+			error: function() {
+			window.alert("Error");
+			},
+            dataType: "json"
+        })
+    }
+   
+</script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Form</h1>
+      <form method="POST" onsubmit="return false">
+		Name <input id="name" type="text" required><br>
+		Email <input id="userEmail" type="text" required><br>
+		Message <input id="message" type="textarea" required><br>
+		<button class="btn-success" id="weatherLocation" onclick="sendMail()">Send</button>
+	  </form>
+      <div class="errors"></div>
+      <div class="showHumidity"></div>
+      <div class="showTemp"></div>
+    </div>
+  </body>
+</html>
